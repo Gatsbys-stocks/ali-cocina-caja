@@ -1,5 +1,5 @@
 /* =====================================================================
-   CONFIGURACIÓN DE COCINA Y CAJA · Ali Doner Kebab
+   CONFIGURACIÓN DE COCINA Y CAJA · Food Truck
    Firebase tiene que ser EL MISMO que en la tablet de mesa (pedidos/mesa/js/config.js).
    ===================================================================== */
 /* =====================================================================
@@ -39,6 +39,6 @@ const FIREBASE_CONFIG = {
   messagingSenderId: "490070778149",
   appId: "1:490070778149:web:6fc91223d6fe9f04697acc"
 };
-// Todo lo de Ali Doner Kebab se guarda bajo esta carpeta de la base de datos,
+// Todo lo de Food Truck se guarda bajo esta carpeta de la base de datos,
 // separado de cualquier otro local que use el mismo proyecto de Firebase.
-const DB_ROOT = "alidoner/";
+const DB_ROOT = "foodtruck/";

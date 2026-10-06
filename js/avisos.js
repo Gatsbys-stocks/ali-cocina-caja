@@ -1,5 +1,5 @@
 /* ===================== AVISOS DE LAS TABLETS DE MESA =====================
-   La app de mesa (clientes) escribe en  alidoner/sessions/sala/inbox :
+   La app de mesa (clientes) escribe en  foodtruck/sessions/sala/inbox :
    pedidos nuevos, "llamar al camarero" y "pedir la cuenta".
    Aquí salen como tarjetas abajo a la izquierda, con sonido, hasta que alguien pulsa "Visto".
    Los platos del pedido ya están metidos en la comanda de la mesa, así que Cocina los ve directamente. */

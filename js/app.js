@@ -1,4 +1,4 @@
-/* Lógica principal de Cocina y Caja · Ali Doner Kebab */
+/* Lógica principal de Cocina y Caja · Food Truck */
 let firebaseReady = false;
 let db = null;
 
@@ -188,7 +188,7 @@ const I18N = {
     legendFree: "Libre", legendBusy: "Con pedido", legendBarra: "Barra",
     keyFree: "Libre", keyBusy: "Ocupada",
     btnSaldo: "Saldo sala", btnHistorial: "📖 Historial", btnSalon: "🎨 Diseño",
-    themeNames: ["🎨 Diseño: Ali Doner", "🎨 Diseño: Noche", "🎨 Diseño: Verde Pakistán", "🎨 Diseño: Azafrán"],
+    themeNames: ["🎨 Diseño: Food Truck", "🎨 Diseño: Noche", "🎨 Diseño: Verde Pakistán", "🎨 Diseño: Azafrán"],
     btnTickets: "Tickets aparcados", btnJuntar: "Juntar mesas",
     back: "← Mesas",
     comanda: "Comanda", comandaBarra: "Pedido para llevar",
@@ -201,7 +201,7 @@ const I18N = {
     add: "Añadir",
     mixerWith: "Con ",
      note: "Nota", notePlaceholder: "Escribe una nota…", noteSave: "Guardar nota", noNote: "Sin nota",
-    ticketMark: "ALI DONER · COMANDA",
+    ticketMark: "FOOD TRUCK · COMANDA",
     ticketEmpty: "Aún no hay artículos<br>en esta mesa",
     total: "Total",
     itemsCount: (n)=> n + (n===1 ? " artículo" : " artículos"),
@@ -356,7 +356,7 @@ const I18N = {
     legendFree: "Free", legendBusy: "Order open", legendBarra: "Bar",
     keyFree: "Free", keyBusy: "Occupied",
     btnSaldo: "Floor balance", btnHistorial: "📖 History", btnSalon: "🎨 Design",
-    themeNames: ["🎨 Theme: Ali Doner", "🎨 Theme: Night", "🎨 Theme: Pakistan green", "🎨 Theme: Saffron"],
+    themeNames: ["🎨 Theme: Food Truck", "🎨 Theme: Night", "🎨 Theme: Pakistan green", "🎨 Theme: Saffron"],
     btnTickets: "Parked tickets", btnJuntar: "Merge tables",
     back: "← Tables",
     comanda: "Order", comandaBarra: "Takeaway order",
@@ -369,7 +369,7 @@ const I18N = {
     add: "Add",
     mixerWith: "With ",
      note: "Note", notePlaceholder: "Write a note…", noteSave: "Save note", noNote: "No note",
-    ticketMark: "ALI DONER · ORDER",
+    ticketMark: "FOOD TRUCK · ORDER",
     ticketEmpty: "No items yet<br>for this table",
     total: "Total",
     itemsCount: (n)=> n + (n===1 ? " item" : " items"),
@@ -436,7 +436,7 @@ const I18N = {
 };
 
 /* ===================== STATE ===================== */
-// Plano de sala de Ali Doner Kebab (según el dibujo): 4 columnas x 3 filas.
+// Plano de sala de Food Truck (según el dibujo): 4 columnas x 3 filas.
 //   fila 1:  ·  1  2  3
 //   fila 2:  ·  4  5  6
 //   fila 3:  7  8  9  10
@@ -465,14 +465,14 @@ let currentLang = "es";
 // (cola de platos por preparar, sin poder tomar pedidos). Se guarda por dispositivo.
 let appRole = "comanda";
 try{
-  const savedRole = localStorage.getItem("ali_role");
+  const savedRole = localStorage.getItem("ft_role");
   if(savedRole === "cocina") appRole = savedRole;
 }catch(e){}
 const THEME_CLASSES = ["", "theme-noche", "theme-pakistan", "theme-azafran"];
 let themeIndex = 0;
 // Cada dispositivo recuerda el diseño elegido.
 try{
-  const savedTheme = parseInt(localStorage.getItem("ali_theme"), 10);
+  const savedTheme = parseInt(localStorage.getItem("ft_theme"), 10);
   if(savedTheme > 0 && savedTheme < THEME_CLASSES.length){
     themeIndex = savedTheme;
     document.documentElement.className = THEME_CLASSES[themeIndex];
@@ -528,7 +528,7 @@ function cycleTheme(){
   themeIndex = (themeIndex + 1) % THEME_CLASSES.length;
   const cls = THEME_CLASSES[themeIndex];
   document.documentElement.className = cls;
-  try{ localStorage.setItem("ali_theme", String(themeIndex)); }catch(e){}
+  try{ localStorage.setItem("ft_theme", String(themeIndex)); }catch(e){}
   showToast(I18N[currentLang].themeNames[themeIndex]);
 }
 
@@ -640,7 +640,7 @@ function joinSession(code){
   if(firebaseReady){
     attachSessionListeners(code);
   }
-  try{ localStorage.setItem("ali_session_code", code); }catch(e){}
+  try{ localStorage.setItem("ft_session_code", code); }catch(e){}
   document.getElementById("login-view").hidden = true;
   showRoleView();
 }
@@ -648,7 +648,7 @@ function joinSession(code){
 function leaveSession(){
   detachSessionListeners();
   currentSession = null;
-  try{ localStorage.removeItem("ali_session_code"); }catch(e){}
+  try{ localStorage.removeItem("ft_session_code"); }catch(e){}
   orders = {};
   ALL_IDS.forEach(id => orders[id] = {});
   history = [];
@@ -740,8 +740,8 @@ function setRole(role){
   appRole = role;
   if(typeof renderInbox === "function") renderInbox();
   try{
-    if(role === "cocina" || role === "pizza" || role === "postre") localStorage.setItem("ali_role", role);
-    else localStorage.removeItem("ali_role"); // "comanda" y "caja" no se recuerdan
+    if(role === "cocina" || role === "pizza" || role === "postre") localStorage.setItem("ft_role", role);
+    else localStorage.removeItem("ft_role"); // "comanda" y "caja" no se recuerdan
   }catch(e){}
   if(currentSession) showRoleView();
   else updateRoleButtons();
@@ -1051,7 +1051,7 @@ function printHTML(bodyHtml){
   document.body.appendChild(iframe);
   const doc = iframe.contentWindow.document;
   doc.open();
-  doc.write(`<!DOCTYPE html><html><head><meta charset="utf-8"><title>Ali Doner Kebab</title>
+  doc.write(`<!DOCTYPE html><html><head><meta charset="utf-8"><title>Food Truck</title>
     <style>
       /* Quita el margen de página que pone el navegador por defecto al
          imprimir: en un rollo de papel continuo (impresora de tickets) eso
@@ -1105,7 +1105,7 @@ function printHTML(bodyHtml){
 }
 
 // Datos fiscales del negocio, tal y como aparecen en el ticket impreso.
-const BIZ_NAME = "ALI DONER KEBAB";
+const BIZ_NAME = "FOOD TRUCK";
 const BIZ_ADDRESS = ["CARRER DE CÒRSEGA 629", "08025 BARCELONA", "TEL. 657 340 510 / 930 000 783"];
 const BIZ_LEGAL = ""; // ← razón social del negocio (rellenar)
 const BIZ_CIF = "";   // ← CIF/NIF del negocio (rellenar)
@@ -1123,11 +1123,11 @@ function escapeHtml(s){
 // tanto si se imprime el "pendiente de cobro" como el recibo final ya cobrado.
 let ticketCounter = 1;
 try{
-  const savedTicketCounter = localStorage.getItem("ali_ticket_counter");
+  const savedTicketCounter = localStorage.getItem("ft_ticket_counter");
   if(savedTicketCounter) ticketCounter = parseInt(savedTicketCounter, 10) || 1;
 }catch(e){}
 function saveTicketCounter(){
-  try{ localStorage.setItem("ali_ticket_counter", String(ticketCounter)); }catch(e){}
+  try{ localStorage.setItem("ft_ticket_counter", String(ticketCounter)); }catch(e){}
 }
 let tableTicketNumbers = {}; // tableId -> nº de ticket asignado a la comanda actual
 function getTicketNumberForTable(tableId){
@@ -2161,7 +2161,7 @@ function printCloseDaySummary(){
   const localeMap = { es:"es-ES", ca:"ca-ES", en:"en-GB" };
   const now = new Date().toLocaleString(localeMap[currentLang],{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"});
   printHTML(`
-    <h2>ALI DONER KEBAB</h2>
+    <h2>FOOD TRUCK</h2>
     <p class="center muted">Cierre de día — ${now}</p>
     <hr>
     <div class="line"><span>Tickets cobrados</span><span>${numTickets}</span></div>

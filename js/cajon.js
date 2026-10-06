@@ -53,7 +53,7 @@
     drawerDevice = device;
     drawerEndpoint = found.endpointNumber;
     drawerInterfaceNumber = found.interfaceNumber;
-    try{ localStorage.setItem("ali_drawer_paired", "1"); }catch(e){}
+    try{ localStorage.setItem("ft_drawer_paired", "1"); }catch(e){}
     updateDrawerButtonStatus("on");
   }
 
@@ -83,7 +83,7 @@
         await openDeviceForUse(devices[0]);
       } else {
         let paired = false;
-        try{ paired = localStorage.getItem("ali_drawer_paired") === "1"; }catch(e){}
+        try{ paired = localStorage.getItem("ft_drawer_paired") === "1"; }catch(e){}
         updateDrawerButtonStatus(paired ? "error" : "off");
       }
     }catch(err){
@@ -95,7 +95,7 @@
   async function openCashDrawer(){
     if(!drawerDevice){
       let paired = false;
-      try{ paired = localStorage.getItem("ali_drawer_paired") === "1"; }catch(e){}
+      try{ paired = localStorage.getItem("ft_drawer_paired") === "1"; }catch(e){}
       if(!paired){
         // Nunca se ha vinculado la impresora: no interrumpimos el cobro con
         // un diálogo de USB; solo avisamos para que se vincule desde "Conectar caja".
@@ -132,7 +132,7 @@
 
   window.openCashDrawer = openCashDrawer;
   let paired0 = false;
-  try{ paired0 = localStorage.getItem("ali_drawer_paired") === "1"; }catch(e){}
+  try{ paired0 = localStorage.getItem("ft_drawer_paired") === "1"; }catch(e){}
   updateDrawerButtonStatus(paired0 ? "error" : "off");
   tryAutoReconnectDrawer();
 })();

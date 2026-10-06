@@ -1,4 +1,4 @@
-/* ===================== CARTA ALI DONER KEBAB (ES / EN / UR) =====================
+/* ===================== CARTA FOOD TRUCK (ES / EN / UR) =====================
    Todo lo prepara Cocina. "group" solo sirve para agrupar la carta en pantalla
    (Comida / Bebidas). Los artículos con "extras" abren un selector al añadirlos
    (carne, refresco...). Para cambiar un precio, edita "price". */

@@ -1,7 +1,7 @@
 {
-  "name": "Ali Doner Kebab · Cocina y Caja",
-  "short_name": "Ali Cocina",
-  "description": "Comanda y cobro Ali Doner Kebab",
+  "name": "Food Truck · Cocina y Caja",
+  "short_name": "FT Cocina",
+  "description": "Comanda y cobro Food Truck",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

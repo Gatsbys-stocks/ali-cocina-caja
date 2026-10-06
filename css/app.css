@@ -1,6 +1,6 @@
-/* Estilos de Cocina y Caja · Ali Doner Kebab */
+/* Estilos de Cocina y Caja · Food Truck */
   :root{
-    /* Paleta Ali Doner Kebab (rojo / amarillo de su carta) */
+    /* Paleta Food Truck (rojo / amarillo de su carta) */
     color-scheme: light;
     --ink:#fff9ee;        /* fondo crema */
     --ink-2:#f5eddf;
@@ -916,7 +916,7 @@
   #vkb-overlay.vkb-numeric .vkb-ok-row .vkb-ok{flex:1;padding:12px 0;}
   body.vkb-open{padding-bottom:0;}
 
-/* ===================== ESTILO ALI DONER KEBAB (como manosalwa.es) ===================== */
+/* ===================== ESTILO FOOD TRUCK ===================== */
 body{background:var(--ink) !important;background-image:none !important;color:var(--text-hi);}
 .topbar{border-bottom:1px solid var(--border);}
 .brand .mark{background:var(--stamp);color:#fff;font-family:var(--font-display);font-size:18px;box-shadow:none;}
